@@ -45,11 +45,12 @@ def complete_missing_data(input_file, output_file):
                 if r_t_row:
                     row = [str(round(math.log(float(r)), 5)) if r.strip() != "" and r != "N/A" else "N/A" for r in r_t_row[1:]]
                     row.insert(0, "ln R_T")  # Reinsert the row label
-            elif row_label == "-w/(%·K^-1)":
-                r_t_row = next((r for r in rows if r[0].strip() == "R_T/Ω"), None)
-                if r_t_row:
-                    row = [str(round(-1 * (float(r) / 100), 5)) if r.strip() != "" and r != "N/A" else "N/A" for r in r_t_row[1:]]
-                    row.insert(0, "-w/(%·K^-1)")  # Reinsert the row label
+            # TODO: Not isable algorithm to figure omega out yet
+            # elif row_label == "-w/(%·K^-1)":
+            #     r_t_row = next((r for r in rows if r[0].strip() == "R_T/Ω"), None)
+            #     if r_t_row:
+            #         row = [str(round(-1 * (float(r) / 100), 5)) if r.strip() != "" and r != "N/A" else "N/A" for r in r_t_row[1:]]
+            #         row.insert(0, "-w/(%·K^-1)")  # Reinsert the row label
             else:
                 row = [cell if cell.strip() != "" else "N/A" for cell in row]
 
