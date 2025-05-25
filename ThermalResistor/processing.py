@@ -62,6 +62,6 @@ def complete_missing_data(input_file, output_file):
 
 # Main execution
 if __name__ == "__main__":
-    input_file = "f:/@courseworks/PhysicsExperiments/ThermalResistor/source_data.csv"
-    output_file = "f:/@courseworks/PhysicsExperiments/ThermalResistor/processed_data.csv"
+    input_file = "source_data.csv"
+    output_file = "processed_data.csv"
     complete_missing_data(input_file, output_file)
