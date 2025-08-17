@@ -1,0 +1,6 @@
+Number of Scale Divisions to be Modified,Modified Ammeter Reading I_X/mA,Standard Ammeter Reading (Decreasing Divisions) I_0/mA,Standard Ammeter Reading (Increasing Divisions) I_0/mA,Average Value,Error ΔI/mA (ΔI = I_0 - I_X)
+20.0,0.2,0.1889,0.1960,,
+40.0,0.4,0.3849,0.3870,,
+60.0,0.6,0.5871,0.5950,,
+80.0,0.8,0.7968,0.8123,,
+100.0,1.0,1.0134,1.0158,,

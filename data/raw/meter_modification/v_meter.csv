@@ -1,0 +1,6 @@
+Number of Scale Divisions to be Modified,Modified Voltmeter Reading U_X/V,Standard Voltmeter Reading (Decreasing Divisions) U_0/V,Standard Voltmeter Reading (Increasing Divisions) U_0/V,Average Value,Error ΔU/V (ΔU = U_0 - U_X)
+20.0,0.3,0.273,0.278,,
+40.0,0.6,0.571,0.585,,
+60.0,0.9,0.875,0.883,,
+80.0,1.2,1.196,1.197,,
+100.0,1.5,1.494,1.497,,

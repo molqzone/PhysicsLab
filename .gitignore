@@ -1,1 +1,22 @@
+# PDM & Virtual Environments
+# 忽略 PDM 的本机设定档和直译器路径档
+.pdm.toml
+.pdm-python
+.pdf-build/
+# 忽略 PDM 在专案内建立的虚拟环境目录
 .venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data & Outputs
+/data/processed/
+/outputs/
+*.png
+
+# IDE / OS specific
+.vscode/
+.idea/
+.DS_Store

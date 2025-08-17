@@ -1,0 +1,19 @@
+[project]
+name = "PhysicsLab"
+version = "0.1.0"
+description = "A reproducible data processing pipeline for physics experiments from the GDUT curriculum, built with Python."
+authors = [
+    {name = "keruth", email = "toiperus@sohu.com"},
+]
+dependencies = ["pandas>=2.3.1", "matplotlib>=3.10.5", "scipy>=1.16.1"]
+requires-python = ">=3.13"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
