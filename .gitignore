@@ -13,7 +13,7 @@ __pycache__/
 
 # Data & Outputs
 /data/processed/
-/outputs/
+/output/
 *.png
 
 # IDE / OS specific

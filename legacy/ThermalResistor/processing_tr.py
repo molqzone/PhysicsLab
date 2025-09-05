@@ -1,6 +1,20 @@
 import csv
 import math
 
+def extract_missing_data(input_file, output_file):
+    with open(input_file, "r", encoding="utf-8") as csvfile:
+        reader = csv.reader(csvfile)
+        headers = next(reader)  # Read the header row
+        missing_rows = [headers]  # Include headers in the output
+
+        for row in reader:
+            if any(cell.strip() == "" for cell in row):
+                missing_rows.append(row)
+
+    with open(output_file, "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(missing_rows)
+
 def complete_missing_data(input_file, output_file):
     with open(input_file, "r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
