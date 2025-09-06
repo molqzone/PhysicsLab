@@ -57,7 +57,7 @@ Follow these instructions to get the project up and running on your local machin
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/PhysicsLab.git](https://github.com/your-username/PhysicsLab.git)
+    git clone [https://github.com/molqzone/PhysicsLab.git](https://github.com/molqzone/PhysicsLab.git)
     cd PhysicsLab
     ```
 
@@ -105,26 +105,20 @@ print(processed_df.head())
 
 ## ✨ Adding a New Experiment
 
-The project is designed to be easily extensible. To add a new experiment (e.g., "ViscosityMeasurement"), follow these steps:
+The project is designed to be easily extensible. To add a new experiment (e.g., "NewExperiment"):
 
-1.  **Add Raw Data**
-    Create a new directory for your experiment inside `data/raw/` and place your source data file(s) there.
-    * Example: `data/raw/viscosity_measurement/fall_times.csv`
+1.  **Add Raw Data:**
+    Place your raw data file(s) in a new directory: `data/raw/new_experiment/`.
 
-2.  **Create the Logic Module**
-    Create a new Python file inside the `src/physicslab/experiments/` directory. This file will contain all the specific calculations and plotting functions for this new experiment.
-    * Example: `src/physicslab/experiments/viscosity_measurement.py`
+2.  **Add Core Logic:**
+    Create a new Python file for its specific logic: `src/physicslab/experiments/new_experiment.py`. Place your analysis and plotting functions here.
 
-3.  **Create the Driver Script**
-    The easiest way is to copy an existing script from the `scripts/` directory and modify it.
-    * Copy `scripts/process_thermal_resistor.py` to `scripts/process_viscosity_measurement.py`.
-    * Inside the new script, change the `import` statements to pull functions from your new logic module (e.g., `from physicslab.experiments.viscosity_measurement import ...`).
-    * Update the file paths at the top of the script to point to the correct data and output directories.
+3.  **Create a Driver Script:**
+    Copy an existing script from the `scripts/` directory and rename it to `scripts/process_new_experiment.py`. Modify the script to import and call the functions from your new logic file.
 
-4.  **Run the New Analysis**
-    You can now run the complete workflow for your new experiment with a single command:
+4.  **Run!**
     ```bash
-    pdm run python scripts/process_viscosity_measurement.py
+    pdm run python scripts/process_new_experiment.py
     ```
 
 ## 🛠️ Tools Used

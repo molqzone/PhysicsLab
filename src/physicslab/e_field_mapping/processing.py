@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import curve_fit
 from pathlib import Path
-import matplotlib.pyplot as plt
 from physicslab.plot_utils import create_figure, save_figure
 
 
