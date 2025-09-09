@@ -4,7 +4,32 @@ import pandas as pd
 from pathlib import Path
 from typing import Union
 
+
 PathLike = Union[str, Path]
+
+
+def load_csv(filepath: PathLike) -> pd.DataFrame:
+    """
+    Loads a standard CSV file with columns as parameters (no transposing).
+
+    Args:
+        filepath (PathLike): The path to the input CSV file.
+
+    Returns:
+        pd.DataFrame: A cleaned DataFrame ready for analysis.
+                      Returns an empty DataFrame if the file is not found.
+    """
+    filepath = Path(filepath)
+    try:
+        df = pd.read_csv(filepath)
+        print(f"✅ Successfully loaded data from: {filepath.name}")
+        return df
+    except FileNotFoundError:
+        print(f"❌ ERROR: Input file not found at {filepath}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"❌ ERROR: An unexpected error occurred while loading {filepath}: {e}")
+        return pd.DataFrame()
 
 
 def load_transposed_csv(filepath: PathLike) -> pd.DataFrame:

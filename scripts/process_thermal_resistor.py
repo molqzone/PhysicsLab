@@ -10,14 +10,15 @@ from physicslab.data_utils import (
 from physicslab.plot_utils import setup_plot_style
 from physicslab.thermal_resistor.processing import (
     analyze_thermal_data,
-    plot_thermal_curves,
+    plot_ln_R_T_vs_1_T,
+    plot_N_vs_T
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 INPUT_CSV = PROJECT_ROOT / "data/raw/thermal_resistor/source_data.csv"
 PROCESSED_CSV = PROJECT_ROOT / "data/processed/thermal_resistor/processed_data.csv"
-OUTPUT_DIR = PROJECT_ROOT / "outputs/thermal_resistor/"
+OUTPUT_DIR = PROJECT_ROOT / "output/thermal_resistor/"
 
 
 def main() -> None:
@@ -43,7 +44,8 @@ def main() -> None:
     save_processed_data(process_df, PROCESSED_CSV)
 
     print(f"\n--> Step 4: Plotting thermal curves and saving to '{OUTPUT_DIR}'...")
-    plot_thermal_curves(process_df, OUTPUT_DIR)
+    plot_ln_R_T_vs_1_T(process_df, OUTPUT_DIR)
+    plot_N_vs_T(process_df, OUTPUT_DIR)
 
     print("\nThermal Resistor data processing workflow completed successfully!")
 

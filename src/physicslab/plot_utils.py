@@ -2,19 +2,16 @@
 
 import matplotlib.pyplot as plt
 from typing import Tuple
+import matplotlib.font_manager as fm
 
 
 def setup_plot_style() -> None:
     """
     Set up the plot style for Matplotlib.
     """
-    # Set font to support Chinese characters (add more as needed)
-    plt.rcParams["font.sans-serif"] = [
-        "Arial Unicode MS",
-        "Noto Sans SC",
-        "STSong",
-        "sans-serif",
-    ]
+    # Set font to support Chinese characters (Source Han Sans SC)
+    plt.rcParams["font.family"] = "sans-serif"
+    plt.rcParams["font.sans-serif"] = ["WenQuanYi Micro Hei"]
     # Ensure the minus sign displays correctly
     plt.rcParams["axes.unicode_minus"] = False
     # Set a default figure size
@@ -28,6 +25,7 @@ def create_figure(
     title: str,
     xlabel: str,
     ylabel: str,
+    use_latex: bool = False,
 ) -> Tuple[plt.Figure, plt.Axes]:
     """
     Create a Matplotlib figure with a title and axis labels.
@@ -36,14 +34,22 @@ def create_figure(
     - title (str): The title of the plot.
     - xlabel (str): The label for the x-axis.
     - ylabel (str): The label for the y-axis.
+    - use_latex (bool): Whether to render text using LaTeX.
 
     Returns:
     - Tuple[plt.Figure, plt.Axes]: The created figure and axes.
     """
     fig, ax = plt.subplots()
-    ax.set_title(title, fontsize=14)
-    ax.set_xlabel(xlabel, fontsize=12)
-    ax.set_ylabel(ylabel, fontsize=12)
+    if use_latex:
+        plt.rcParams["text.usetex"] = True
+        ax.set_title(title, fontsize=14)
+        ax.set_xlabel(xlabel, fontsize=12)
+        ax.set_ylabel(ylabel, fontsize=12)
+    else:
+        plt.rcParams["text.usetex"] = False
+        ax.set_title(title, fontsize=14)
+        ax.set_xlabel(xlabel, fontsize=12)
+        ax.set_ylabel(ylabel, fontsize=12)
     return fig, ax
 
 

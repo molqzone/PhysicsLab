@@ -36,31 +36,24 @@ def analyze_thermal_data(raw_df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def plot_thermal_curves(processed_df: pd.DataFrame, output_dir: str | Path):
+def plot_ln_R_T_vs_1_T(processed_df: pd.DataFrame, output_dir: str | Path):
     """
-    Plot thermal curves based on processed data.
-
-    Parameters:
-    processed_df (pd.DataFrame): DataFrame containing processed data with necessary columns.
-    output_dir (str): Directory to save the plots.
+    Plot ln(R_T) vs 1/T and save the figure.
     """
     output_dir = Path(output_dir)
     os.makedirs(output_dir, exist_ok=True)
 
-    # --- Plot 1: ln(R_T) vs 1/T ---
     df1 = processed_df.dropna(subset=["1/T (10^-2 K^-1)", "ln R_T"])
     x1 = df1["1/T (10^-2 K^-1)"] * 1e-2  # Convert to K^-1
     y1 = df1["ln R_T"]
 
-    # Use the create_figure function to create the plot
     fig, ax1 = create_figure(
-        title="$\ln R_T$ - $1/T$ 直线图",
-        xlabel=r"$1/T\ (\mathrm{K}^{-1})$",
-        ylabel=r"$\ln R_T$",
+        title="$\\ln R_T$ - $1/T$ 直线图",
+        xlabel=r"$1/T\\ (\\mathrm{K}^{-1})$",
+        ylabel=r"$\\ln R_T$",
     )
     ax1.scatter(x1, y1, color="b", label="实验数据")
 
-    # Linear fitting
     def linear_func(x, k, b):
         return k * x + b
 
@@ -73,26 +66,34 @@ def plot_thermal_curves(processed_df: pd.DataFrame, output_dir: str | Path):
         x_fit,
         linear_func(x_fit, k, b),
         "r-",
-        label=rf"$\ln R_T = ({k:.2f}\pm{k_err:.2f})x {b:+.2f}\pm{b_err:.2f}$",
+        label=rf"$\\ln R_T = ({k:.2f}\\pm{k_err:.2f})x {b:+.2f}\\pm{b_err:.2f}$",
     )
     ax1.legend()
 
-    # Use the save_figure utility
     save_figure(fig, output_dir / "ln_R_T_vs_1_T.png")
 
-    # --- Plot 2: N vs T ---
+
+def plot_N_vs_T(processed_df: pd.DataFrame, output_dir: str | Path):
+    """
+    Plot N vs T and save the figure.
+    """
+    output_dir = Path(output_dir)
+    os.makedirs(output_dir, exist_ok=True)
+
     df2 = processed_df.dropna(subset=["N", "T/K"])
     x2 = df2["T/K"]
     y2 = df2["N"]
 
     fig, ax2 = create_figure(
         title="$N$ - $T$ 直线图",
-        xlabel=r"$T\ (\mathrm{K})$",
+        xlabel=r"$T\\ (\\mathrm{K})$",
         ylabel=r"$N$",
     )
     ax2.scatter(x2, y2, color="g", label="实验数据")
 
-    # Linear fitting
+    def linear_func(x, k, b):
+        return k * x + b
+
     popt, pcov = curve_fit(linear_func, x2, y2)
     k, b = popt
     k_err, b_err = np.sqrt(np.diag(pcov))
@@ -102,9 +103,8 @@ def plot_thermal_curves(processed_df: pd.DataFrame, output_dir: str | Path):
         x_fit,
         linear_func(x_fit, k, b),
         "r-",
-        label=rf"$N = ({k:.2f}\pm{k_err:.2f})x {b:+.2f}\pm{b_err:.2f}$",
+        label=rf"$N = ({k:.2f}\\pm{k_err:.2f})x {b:+.2f}\\pm{b_err:.2f}$",
     )
     ax2.legend()
 
-    # Use the save_figure utility
     save_figure(fig, output_dir / "N_vs_T.png")
