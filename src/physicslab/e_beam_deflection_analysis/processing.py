@@ -113,7 +113,7 @@ def count_mass_to_charge_ratio(processed_df: pd.DataFrame) -> None:
         V_2 = float(row["V_V"])
         I_avg = float(row["I_avg_A"])
         numerator = 8 * np.pi**2 * V_2 * (L_N**2 + D_N**2)
-        denominator = mu_0 * N**2 * h**2 * I_avg**2
+        denominator = mu_0**2 * N**2 * h**2 * I_avg**2
         em_ratio = numerator / denominator
         results.append({"V_2": V_2, "I_avg": I_avg, "em_ratio": em_ratio})
     return results
