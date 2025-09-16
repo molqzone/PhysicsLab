@@ -69,14 +69,20 @@ def plot_V_r_over_V_B_vs_ln_r_over_ln_7(
     k, b = popt
     x_fit = np.linspace(x1.min(), x1.max(), 100)
     y_fit = linear_func(x_fit, k, b)
-    # Format legend with period as decimal separator and proper sign
+
+    def format_float(val):
+        s = f"{val:+.2f}"
+        if s.endswith(".00"):
+            s = s[:-3]
+        return s
+
     k_str = f"{k:.4f}".replace(",", ".")
-    b_str = f"{b:+.4f}".replace(",", ".")
+    b_str = format_float(b)
     ax1.plot(
         x_fit,
         y_fit,
         "r-",
-        label=rf"拟合: $\frac{{V_r}}{{V_B}} = {k_str} \cdot \frac{{\log(\bar{{r}})}}{{\log(7)}}.0. {b_str}$",
+        label=rf"拟合: $V_R/V_B = {k_str} \cdot \log({{r}})/\log(7) {b_str}$",
     )
     ax1.legend()
     save_figure(fig, output_dir / "V_R_over_V_B_vs_ln_r_over_ln_7.png")
