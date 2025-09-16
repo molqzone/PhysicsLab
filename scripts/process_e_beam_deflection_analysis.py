@@ -6,7 +6,7 @@ from physicslab.data_utils import load_csv
 from physicslab.plot_utils import setup_plot_style
 from physicslab.e_beam_deflection_analysis.processing import (
     plot_D_Y_vs_V_d,
-    plot_D_vs_I,
+    plot_D_B_vs_I,
     count_mass_to_charge_ratio,
 )
 
@@ -20,9 +20,6 @@ MAGNETIC_DEFLECTION_MEASUREMENT_CSV = (
 )
 EM_RATIO_MAG_FOCUS_CSV = (
     PROJECT_ROOT / "data/raw/e_beam_deflection_analysis/em_ratio_mag_focus.csv"
-)
-PROCESSED_CSV = (
-    PROJECT_ROOT / "data/processed/e_beam_deflection_analysis/processed_data.csv"
 )
 OUTPUT_DIR = PROJECT_ROOT / "output/e_beam_deflection_analysis/"
 
@@ -47,12 +44,13 @@ def main() -> None:
 
     print("\n--> Step 2: Plotting and saving figures...")
     plot_D_Y_vs_V_d(electric_raw_df, OUTPUT_DIR)
-    plot_D_vs_I(magnetic_raw_df, OUTPUT_DIR)
+    plot_D_B_vs_I(magnetic_raw_df, OUTPUT_DIR)
 
-    print(f"\n--> Step 3: Calculating e/m ratios from '{EM_RATIO_MAG_FOCUS_CSV.name}'...")
+    print(
+        f"\n--> Step 3: Calculating e/m ratios from '{EM_RATIO_MAG_FOCUS_CSV.name}'..."
+    )
     ratio_dict = count_mass_to_charge_ratio(em_ratio_raw_df)
     print("Calculated e/m ratios:", ratio_dict)
-    
 
     print(
         "\nE-Beam Deflection Analysis data processing workflow completed successfully!"

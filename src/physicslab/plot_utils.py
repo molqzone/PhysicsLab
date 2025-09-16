@@ -50,6 +50,8 @@ def create_figure(
         ax.set_title(title, fontsize=14)
         ax.set_xlabel(xlabel, fontsize=12)
         ax.set_ylabel(ylabel, fontsize=12)
+    # Add a soft grid for better readability
+    ax.grid(True, which="both", linestyle="--", linewidth=0.5, alpha=0.5)
     return fig, ax
 
 

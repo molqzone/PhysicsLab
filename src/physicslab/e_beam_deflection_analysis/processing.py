@@ -14,12 +14,12 @@ def plot_D_Y_vs_V_d(processed_df: pd.DataFrame, output_dir: str | Path):
     os.makedirs(output_dir, exist_ok=True)
     df1 = processed_df.dropna(subset=["V2_V", "Vd_V", "Dy_mm"])
     fig, ax1 = create_figure(
-        title="$V_d$ - $D_Y$ 直线图", xlabel="$D_Y$ (mm)", ylabel="$V_d$ (V)"
+        title="$D_Y$ - $V_d$ 直线图", xlabel="$V_d$ (mm)", ylabel="$D_Y$ (V)"
     )
     colors = plt.cm.tab10.colors
     for idx, (v2_v, group) in enumerate(df1.groupby("V2_V")):
-        x = group["Dy_mm"]
-        y = group["Vd_V"]
+        x = group["Vd_V"]
+        y = group["Dy_mm"]
         ax1.scatter(x, y, color=colors[idx % len(colors)], label=rf"$V_2={{{v2_v}}}$")
 
         def linear_func(x, k, b):
@@ -51,12 +51,12 @@ def plot_D_Y_vs_V_d(processed_df: pd.DataFrame, output_dir: str | Path):
     save_figure(fig, output_dir / "V_d_vs_D_Y.png")
 
 
-def plot_D_vs_I(processed_df: pd.DataFrame, output_dir: str | Path):
+def plot_D_B_vs_I(processed_df: pd.DataFrame, output_dir: str | Path):
     output_dir = Path(output_dir)
     os.makedirs(output_dir, exist_ok=True)
     df2 = processed_df.dropna(subset=["V2_V", "I_mA", "Db_mm"])
     fig, ax2 = create_figure(
-        title="$I$ - $D$ 直线图", xlabel="$I$ (mA)", ylabel="$D$ (mm)"
+        title="$D_B$ - $I$ 直线图", xlabel="$I$ (mA)", ylabel="$D_B$ (mm)"
     )
     colors = plt.cm.tab10.colors
     for idx, (v2_v, group) in enumerate(df2.groupby("V2_V")):
@@ -105,7 +105,7 @@ def count_mass_to_charge_ratio(processed_df: pd.DataFrame) -> None:
     """
     mu_0 = 4 * np.pi * 1e-7  # Vacuum permeability (H/m)
     L_N = 0.234  # m
-    N = 526
+    N = 1550
     D_N = 0.090  # m
     h = 0.145  # m (use h_Y as default, adjust if needed)
     results = []
